@@ -3,9 +3,12 @@
 This project is designed to stream repository data from the GitHub API, process the data in real-time using PySpark Streaming, and present analytics on terminal output. The system employs Docker to manage dependencies and streamline deployment.
 
 ### Project Overview
+
 This streaming application fetches data from the GitHub API based on specific programming languages, processes the stream for various analytics like the total number of repositories per language, recent pushes, average star count, and top frequent words in descriptions.
 
 ### System Architecture
+
+![System Architecture](./System_Architecture.png)
 
 - **data_source.py**: Fetches the repository data from GitHub API and streams it over a TCP socket.
 - **spark_app.py**: Utilizes PySpark to process the streamed data and compute the desired analytics.
