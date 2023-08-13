@@ -37,7 +37,7 @@ services:
     volumes:
       - ./:/streaming
     environment:
-      - TOKEN=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
+      - TOKEN=
     command: python3.9 -u /streaming/data_source.py
 #  webapp:
 #    image: # your image
