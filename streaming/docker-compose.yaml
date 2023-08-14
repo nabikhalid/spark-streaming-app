@@ -13,7 +13,7 @@ services:
       - ./:/streaming
 
   spark-worker:
-    image: eecs4415/spark # Note: This is a custom image. Replace with an image that has the required Spark dependencies.
+    image: project/spark # Note: This is a custom image. Replace with an image that has the required Spark dependencies.
     environment:
       - SPARK_MODE=worker
       # ... other env variables ...
