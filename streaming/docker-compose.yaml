@@ -1,50 +1,44 @@
-version: '2'
+version: '2' # Using Docker Compose file format version 2
 
 services:
   spark:
-    image: # your image
+    image: # Replace with your Docker image for Spark master
     environment:
       - SPARK_MODE=master
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
+      # ... other env variables ...
     ports:
       - '8080:8080'
-      - '4040:4040'
-      - '4041:4041'
+      # ... other ports ...
     volumes:
       - ./:/streaming
+
   spark-worker:
-    image: eecs4415/spark
+    image: eecs4415/spark # Note: This is a custom image. Replace with an image that has the required Spark dependencies.
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
+      # ... other env variables ...
     ports:
       - '28081:8081'
-      - '24040:4040'
-      - '24041:4041'
+      # ... other ports ...
     volumes:
       - ./:/streaming
+
   data-source:
-    image: # your image
+    image: # Replace with your Docker image for the data source
     volumes:
       - ./:/streaming
     environment:
-      - TOKEN=
+      - TOKEN=${TOKEN} # Set your GitHub token in your environment variables
     command: python3.9 -u /streaming/data_source.py
+
+# Placeholder for potential future web application
 #  webapp:
-#    image: # your image
+#    image: # Replace with your Docker image for web app
 #    volumes:
 #      - ./:/streaming
 #    ports:
 #      - '5000:5000'
-#    command:
+#    command: ...
+
   redis:
-    image: redis
+    image: redis # Using official Redis image
